@@ -8,6 +8,9 @@ dotenv.config();
 
 
 const app = express();
+const logger = pinoHttp();
+app.use(logger);
+
 const PORT = process.env.PORT || 3000;
 
     pino({
