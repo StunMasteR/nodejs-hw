@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import pino from 'pino';
+import pinoHttp from 'pino-http';
 
 import dotenv from 'dotenv';
 dotenv.config();
