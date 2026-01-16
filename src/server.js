@@ -1,34 +1,34 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import pino from 'pino';
-import pinoHttp from 'pino-http';
+import pino from 'pino-http';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 
 const app = express();
-const logger = pinoHttp();
-app.use(logger);
-app.use(pinoHttp());
+
+
 
 const PORT = process.env.PORT || 3000;
-
-    pino({
-      level: 'info',
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-          translateTime: 'HH:MM:ss',
-          ignore: 'pid,hostname',
-          messageFormat:
-            '{req.method} {req.url} {res.statusCode} - {responseTime}ms',
-          hideObject: true,
-        },
+app.use(
+  pino({
+    level: 'info',
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        translateTime: 'HH:MM:ss',
+        ignore: 'pid,hostname',
+        messageFormat:
+          '{req.method} {req.url} {res.statusCode} - {responseTime}ms',
+        hideObject: true,
       },
-    }),
+    },
+  }),
+);
+
   app.use(cors());
   app.use(helmet());
   app.use(express.json({ limit: '5mb' }));
